@@ -1,3 +1,9 @@
 # Orchestrator for ChaosOrca
 
-Install with `sudo pip3 install -I --editable .`
+## Build the application
+
+Build and install using the following command:
+
+```
+ $ sudo pip3 install -I --editable .
+```
