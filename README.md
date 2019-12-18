@@ -21,7 +21,7 @@ Lo primero que tenemos que hacer es preparar las imágenes que vamos a necesitar
 Build and install using the following command:
 
  ```
- $ sudo pip3 install --editable .
+ $ sudo pip3 install -I --editable .
  ```
 
 ## Execute
