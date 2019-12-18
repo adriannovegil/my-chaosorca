@@ -1,0 +1,1 @@
+[{"targets": ["172.27.0.4:8080"], "labels": {"job": "grafana"}}]
