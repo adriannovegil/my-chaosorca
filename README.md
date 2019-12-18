@@ -14,7 +14,6 @@ Lo primero que tenemos que hacer es preparar las imágenes que vamos a necesitar
  4. perf
  5. sysc
  6. sysm
- 7. prometheus
 
 ## Install
 
@@ -31,10 +30,12 @@ Build and install using the following command:
 
 ## Commands
 
- * prom - Handles launching/restarting Prometheus and launch of cAdvisor.
- * monit - Attach monitoring to container.
- * fault - Adds a syscall fault to a container.
- * metric - Extract different kind of csv formatted metrics from Prometheus.
+ * `fault` - Adds a syscall fault to a container.
+ * `flist` - List all container that can be attacked.
+ * `list` -  List all containers relevant to chaosorca currently running
+ * `metric` - Extract different kind of csv formatted metrics from Prometheus.
+ * `monit` - Attach monitoring to container.
+ * `prom` - Handles launching/restarting Prometheus and launch of cAdvisor.
 
 Each command has subcommands cabable of doing different things.
 

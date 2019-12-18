@@ -1,2 +1,3 @@
-docker build . -t chaosorca/sysm
+#!/bin/bash
 
+docker build . -t chaosorca/sysm

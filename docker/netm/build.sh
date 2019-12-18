@@ -1,2 +1,3 @@
-docker build . -t chaosorca/netm
+#!/bin/bash
 
+docker build . -t chaosorca/netm

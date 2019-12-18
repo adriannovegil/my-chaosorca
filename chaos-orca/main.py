@@ -16,6 +16,9 @@ def main():
     '''ChaosOrca - Tool made by JSimo'''
     pass
 
+#
+# Application commands
+#
 @main.command()
 def list():
     '''List all containers relevant to chaosorca currently running'''
@@ -23,8 +26,13 @@ def list():
 
 @main.command()
 def flist():
-    '''List all container that can be attacked.'''
+    '''List all container that can be attacked'''
     print([c.name for c in container_api.filteredList()])
+
+@main.command()
+def clist():
+    '''Return all containers with chaos in them'''
+    print([c.name for c in container_api.getChaosContainers()])
 
 main.add_command(p_cmd.fault) # Fault injection commands.
 main.add_command(c_cmd.prom) # Prometheus start/stop/more.

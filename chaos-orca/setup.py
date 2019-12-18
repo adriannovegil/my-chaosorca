@@ -4,7 +4,6 @@ from setuptools.command.install import install as _install
 from setuptools.command.develop import develop as _develop
 from setuptools.command.egg_info import egg_info as _egg_info
 
-
 def post_install():
     print("hello from postinstall?")
     call(['./misc/install_autocomplete.sh'])
