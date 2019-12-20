@@ -39,6 +39,38 @@ Build and install using the following command:
 
 Each command has subcommands cabable of doing different things.
 
+## Fault options
+
+A perturbation is defined as a tuple `(s, e, d)` which describes how to perturb the container. Here
+
+ * `s` is the system call,
+ * `e` the error code and
+ * `d` the delay to use.
+
+Together with this perturbation there is a fourth parameter available which is the duration of the perturbation, by default set to 120 seconds.
+
+In total the default duration of an experiment is therefore 6 minutes long. The selected time was used as to keep have enough time to compare metrics while enabling the ability to run many experiments within a reasonable time frame.
+
+Together the parameters forms a large amount of available perturbations as there exists more than 300 available system calls and more than 100 different possible error codes.
+
+This results in the necessity of picking a subset of these to use for the experiment runs.
+
+
+
+
+
+Common system calls [Linux Syscall Reference](https://syscalls.kernelgrok.com/):
+
+ * `open`, `write`, `writev`, `read`, `readv`, `sendfile`, `sendfile64`, `poll`, `select`
+
+Common errors [All possible error codes](http://man7.org/linux/man-pages/man3/errno.3.html):
+
+  * None, `EACCES`, `EPERM`, `ENOENT`, `EIO`, `EINTR`, `ENOSYS`
+
+Common delays:
+
+  * None, `1000`, `5000`
+
 ## Basic example
 
 Following, you can see the necessary commands to execute a basic example using Nginx.

@@ -25,8 +25,8 @@ signal.signal(signal.SIGINT, signal_handler)
 EXPERIMENT_INFO = Info('experiment_info', '<description/>')
 
 def main():
-    '''Syscall monitoring, only support one PID currently.'''
-    #Start prometheus exporter.
+    '''Syscall perturbation, only support one PID currently.'''
+    # Start prometheus exporter.
     start_http_server(12301)
 
     # Parse variables.
@@ -37,6 +37,7 @@ def main():
     if 'SYSC_FAULT' not in os.environ and os.environ['SYSC_FAULT'] is not '':
         print('Missing required fault parameter')
 
+    # Prepare environment
     syscall = os.environ['SYSC_FAULT'].split(':')[0]
     sysm_fault = os.environ['SYSC_FAULT']
     pid = os.environ['SYSC_PID']
@@ -47,6 +48,7 @@ def main():
     # Add information endpoint for current sysfault
     EXPERIMENT_INFO.info({'syscall': syscall, 'experiment_perturbation': sysm_fault})
 
+    # strace
     print('Starting strace: %s' % cmd)
     proc = subprocess.Popen(
         cmd,
@@ -60,11 +62,11 @@ def main():
         line = proc.stderr.readline()
         if line != '':
             line = line.rstrip()
-            #the real code does filtering here
+            # the real code does filtering here
             splitline = line.split('(')
             syscall = splitline[0]
-            params = ''.join(splitline[1:]) #everything but the syscall itself.
-
+            # everything but the syscall itself.
+            params = ''.join(splitline[1:])
             # TODO: filter out all but the syscall under perturbation.
             syscall_counter.labels(
                 syscall=syscall,
@@ -72,6 +74,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-

@@ -24,17 +24,19 @@ signal.signal(signal.SIGINT, signal_handler)
 
 def main():
     '''Syscall monitoring, only support one PID currently.'''
-    #Start prometheus exporter.
+    # Start prometheus exporter.
     start_http_server(12301)
 
     # Parse variables.
     if 'SYSM_PID' not in os.environ:
         print('Missing required PID parameter')
         exit()
-    pid = os.environ['SYSM_PID']
 
+    # Prepare environment
+    pid = os.environ['SYSM_PID']
     cmd = ['./trace_command.sh', pid]
 
+    # bpftrace
     print('Starting bpftrace: %s' % ' '.join(cmd))
     proc = subprocess.Popen(
         cmd,
@@ -48,13 +50,13 @@ def main():
         line = proc.stdout.readline()
         if line != '':
             line = line.rstrip()
-            #Split outputs
+            # Split outputs
             items = line.split()
             if len(items) == 2:
                 count = items[1]
-                #[...syscall_enter_<syscall>]:
+                # [...syscall_enter_<syscall>]:
                 syscall = items[0].split('_')[-1][:-2]
-                #print(syscall, 'executed', count, 'times')
+                # print(syscall, 'executed', count, 'times')
                 syscall_counter.labels(
                     syscall=syscall).inc(int(count))
 

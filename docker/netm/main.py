@@ -14,10 +14,11 @@ http_counter = Counter(
 
 # Main
 def main():
-    #Start prometheus exporter.
+    '''Network monitoring.'''
+    # Start prometheus exporter.
     start_http_server(12301)
 
-    #Setup of pyshark
+    # Setup of pyshark
     while True:
         capture = pyshark.LiveCapture(interface='eth0', display_filter='http', bpf_filter='host ' + os.environ['NETM_IP'] + ' and not port 12301')#, display_filter='http')
         capture.set_debug()
