@@ -28,6 +28,7 @@ def start():
         remove=True,
         volumes={dir_name+'/prometheus/': {'bind': '/etc/prometheus/', 'mode': 'rw'},
         'prometheus_data': {'bind':'/prometheus', 'mode': 'rw'}})
+
     print('Created prometheus instance')
 
     # Create and connect prometheus to network.
@@ -37,6 +38,7 @@ def start():
         driver='bridge',
         internal=True, # private network.
     )
+    
     network.connect(prometheus_container)
     print('Created prometheus network')
 
